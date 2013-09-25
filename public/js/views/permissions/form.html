@@ -1,0 +1,30 @@
+<div>
+    <form novalidate data-bind="submit: submit" enctype='multipart/form-data' method="post">
+        <fieldset>
+            <legend data-bind="text: !!id ? 'Atualizar Permissão' : 'Nova Permissão'"></legend>
+            <label>Nível</label>
+            <select name="role_id" data-bind="options: roles,optionsValue: 'id',optionsText: 'name',value: obj.role_id"></select>
+            <label>Recurso</label>
+            <select name="resource" data-bind="options: resources,optionsValue: 'id',optionsText: 'name',value: obj.resource"></select>
+            <div class="checkbox_group">
+                <label class="checkbox inline">
+                  <input type="hidden" name="action_read" value="0">
+                  <input type="checkbox" data-bind="checked: obj.action_read" name="action_read" value="1"> Ler
+                </label>
+                <label class="checkbox inline">
+                    <input type="hidden" name="action_write" value="0">
+                  <input type="checkbox" data-bind="checked: obj.action_write" name="action_write" value="1"> Gravar
+                </label>
+                <label class="checkbox inline">
+                  <input type="hidden" name="action_remove" value="0">
+                  <input type="checkbox" data-bind="checked: obj.action_remove" name="action_remove" value="1"> Excluir
+                </label>
+            </div>
+            <div>
+                <hr />
+                <button type="submit" class="btn btn-primary" data-loading-text="Aguarde..." data-bind="text: !!id ? 'Atualizar' : 'Gravar' "></button>
+                <a data-bind="attr: {href: '#'+resource}" class="btn">Voltar</a>
+            </div>
+        </fieldset>
+    </form>
+</div>

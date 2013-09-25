@@ -1,0 +1,1 @@
+<p>Olá, sua senha foi alterada para <?php echo($password) ?></p>
