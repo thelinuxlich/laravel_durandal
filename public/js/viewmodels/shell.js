@@ -30,7 +30,7 @@ function (router,app){
         },
         isActive: function(resource) {
             var link = this.router.activeInstruction();
-            return link.fragment.match(resource+"/") !== null;
+            return link.fragment.match(resource) !== null;
         },
         activate: function () {
             var that = this;

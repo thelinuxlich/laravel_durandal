@@ -26,12 +26,12 @@ $.extend( $.fn.dataTableExt.oPagination, {
 			};
 
 			$(nPaging).addClass('pagination').append(
-				'<ul>'+
-					'<li class="prev disabled"><a href="#">&larr; '+oLang.sPrevious+'</a></li>'+
-					'<li class="next disabled"><a href="#">'+oLang.sNext+' &rarr; </a></li>'+
-				'</ul>'
+				'<div class="btn-group">'+
+					'<button type="button" class="btn btn-default prev disabled">&larr; '+oLang.sPrevious+'</button>'+
+					'<button type="button" class="btn btn-default next disabled">'+oLang.sNext+' &rarr; </button>'+
+				'</div>'
 			);
-			var els = $('a', nPaging);
+			var els = $('button', nPaging);
 			$(els[0]).bind( 'click.DT', { action: "previous" }, fnClickHandler );
 			$(els[1]).bind( 'click.DT', { action: "next" }, fnClickHandler );
 		},
@@ -59,13 +59,13 @@ $.extend( $.fn.dataTableExt.oPagination, {
 
 			for ( i=0, iLen=an.length ; i<iLen ; i++ ) {
 				// Remove the middle elements
-				$('li:gt(0)', an[i]).filter(':not(:last)').remove();
+				$('button:gt(0)', an[i]).filter(':not(:last)').remove();
 
 				// Add the new list items and their event handlers
 				for ( j=iStart ; j<=iEnd ; j++ ) {
-					sClass = (j==oPaging.iPage+1) ? 'class="active"' : '';
-					$('<li '+sClass+'><a href="#">'+j+'</a></li>')
-						.insertBefore( $('li:last', an[i])[0] )
+					sClass = (j==oPaging.iPage+1) ? 'class="active btn btn-default"' : '';
+					$('<button '+sClass+'>'+j+'</button>')
+						.insertBefore( $('button:last', an[i])[0] )
 						.bind('click', function (e) {
 							e.preventDefault();
 							oSettings._iDisplayStart = (parseInt($('a', this).text(),10)-1) * oPaging.iLength;
@@ -75,15 +75,15 @@ $.extend( $.fn.dataTableExt.oPagination, {
 
 				// Add / remove disabled classes from the static elements
 				if ( oPaging.iPage === 0 ) {
-					$('li:first', an[i]).addClass('disabled');
+					$('button:first', an[i]).addClass('disabled');
 				} else {
-					$('li:first', an[i]).removeClass('disabled');
+					$('button:first', an[i]).removeClass('disabled');
 				}
 
 				if ( oPaging.iPage === oPaging.iTotalPages-1 || oPaging.iTotalPages === 0 ) {
-					$('li:last', an[i]).addClass('disabled');
+					$('button:last', an[i]).addClass('disabled');
 				} else {
-					$('li:last', an[i]).removeClass('disabled');
+					$('button:last', an[i]).removeClass('disabled');
 				}
 			}
 		}

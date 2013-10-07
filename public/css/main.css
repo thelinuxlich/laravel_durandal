@@ -14,9 +14,6 @@
 .dataTable tbody tr td {
     cursor: pointer;
 }
-.checkbox_group {
-    margin-bottom: 10px;
-}
 .splash {
     text-align: center;
     margin: 10% 0 0 0;
@@ -37,6 +34,7 @@
 
 .page-host {
     position: relative;
+    margin-left: 0px;
 }
 
 .navbar-fixed-top .navbar-inner {
@@ -83,7 +81,7 @@
 }
 
 .form-signin {
-    max-width: 300px;
+    max-width: 314px;
     padding: 19px 29px 29px;
     margin: 50px auto 20px;
     background-color: #f5f5f5;
@@ -133,6 +131,27 @@ form .help-block ul {
 ul.DTTT_dropdown.dropdown-menu {
   z-index: 2003;
 }
-#event_upload_photo {
-    margin-left: 0;
+.control-group.double-column {
+    float:left;
+    clear: none;
+    margin-right: 20px;
+}
+.control-group, .clear {
+    clear:both;
+}
+.control-group.clear-right {
+    clear: both;
+}
+input + .btn-primary {
+    margin-left: 5px;
+}
+#flash {
+    margin-left: 0px;
+}
+.container-liquid {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.fileupload .row {
+    margin-left: 0px;
 }

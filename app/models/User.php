@@ -4,7 +4,7 @@ class User extends Base {
     protected $hidden = array('password');
 
     public function role() {
-        $this->belongsTo("Role");
+        return $this->belongsTo("Role");
     }
 
     public function scopeAllWithRole($query) {

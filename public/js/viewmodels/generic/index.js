@@ -2,7 +2,7 @@ define(['viewmodels/generic/table','plugins/router'],
 function (Table,router) {
     var Page = function() {
         this.table = "";
-        this.new_button_name = "";
+        this.caption = "";
         this.resource = "";
     };
 
@@ -16,7 +16,7 @@ function (Table,router) {
         return $.get(this.resource).then(function(r){
             var table = new Table(r.data,r.fields,r.actions);
             that.table = table.html;
-            that.new_button_name = r.new_button_name;
+            that.caption = r.caption;
         });
     };
 

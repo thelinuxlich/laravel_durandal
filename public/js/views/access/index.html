@@ -1,7 +1,7 @@
 <form data-bind="submit: submit" class="form-signin">
-    <h2 class="form-signin-heading" data-bind="text: title">Please sign in</h2>
-    <input type="email" name="email" id="email" data-bind="value: email" class="input-block-level" placeholder="Email">
-    <input type="password" id="password" name="password" data-bind="value: password" class="input-block-level" placeholder="Password">
+    <h2 class="form-signin-heading">{{title}}</h2>
+    <input type="email" name="email" id="email" data-bind="value: email" class="form-control" placeholder="Email">
+    <input type="password" id="password" name="password" data-bind="value: password" class="form-control" placeholder="Senha">
     <button type="submit" data-loading-text="Aguarde..." class="btn btn-primary">Conectar</button>
     <a id="forgot_password" class="btn btn-link" data-bind="click: forgotPassword">Esqueci minha senha</a>
 </form>

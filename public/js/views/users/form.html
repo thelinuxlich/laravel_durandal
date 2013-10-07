@@ -1,45 +1,57 @@
 <div>
     <form novalidate data-bind="submit: submit" enctype='multipart/form-data' method="post">
         <fieldset>
-            <legend data-bind="text: !!id ? 'Atualizar Usuário' : 'Novo Usuário'"></legend>
-            <div class='control-group'>
-                <label class='control-label' for='nome'>Nome</label>
-                <div class='controls'>
-                    <input type='text' maxlength="255" name='name' data-bind="value: obj.name" data-validation-required-required='true' data-validation-required-message='Digite um nome de usuário.'>
+            <legend>{{caption}}</legend>
+            <div class='form-group row'>
+                <div class="col-md-3">
+                    <label class='control-label' for='nome'>Nome</label>
+                    <input  class="form-control" type='text' maxlength="255" name='name' data-bind="value: obj.name" required title='Digite um nome de usuário.'>
                 </div>
             </div>
-            <div class='control-group'>
-                <label class='control-label' for='email'>E-mail</label>
-                <div class='controls'>
-                    <input type='email' maxlength="255"  name='email' data-bind="value: obj.email" data-validation-required-required='true' data-validation-required-message='Digite um e-mail válido.'>
+            <div class='form-group row'>
+                <div class="col-md-3">
+                    <label class='control-label' for='email'>E-mail</label>
+                    <input  class="form-control" type='email' maxlength="255"  name='email' data-bind="value: obj.email" required title='Digite um e-mail válido.'>
                 </div>
             </div>
             <!-- ko if: !(!!id) -->
-            <div class='control-group'>
-                <label class='control-label' for='password'>Senha</label>
-                <div class='controls'>
-                    <input type='password' maxlength="255"  name='password' data-bind="value: obj.password" data-validation-required-required='true' data-validation-required-message='Digite uma senha.'>
+            <div class='form-group row'>
+                <div class="col-md-3">
+                    <label class='control-label' for='password'>Senha</label>
+                    <input  class="form-control" type='password' maxlength="255"  name='password' data-bind="value: obj.password" required title='Digite uma senha.'>
                 </div>
             </div>
             <!-- /ko -->
-            <label>Nível</label>
-            <select name="role_id" data-bind="options: roles,optionsValue: 'id',optionsText: 'name',value: obj.role_id"></select>
-            <label>Status</label>
-            <select name="status" data-bind="value: obj.status">
-                <option value="1">Ativo</option>
-                <option value="0">Inativo</option>
-            </select>
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <label for="role_id">Nível</label>
+                    <select class="form-control" name="role_id" data-bind="options: roles,optionsValue: 'id',optionsText: 'name',value: obj.role_id"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <label for="status">Status</label>
+                    <select class="form-control"  name="status" data-bind="value: obj.status">
+                        <option value="1">Ativo</option>
+                        <option value="0">Inativo</option>
+                    </select>
+                </div>
+            </div>
             <div data-bind="attr: {class: 'fileupload fileupload-'+(!!obj.avatar() ? 'exists' : 'new')}" data-provides="fileupload">
-              <div class="fileupload-new thumbnail" style="width: 50px; height: 50px;"></div>
-              <div class="fileupload-preview fileupload-exists thumbnail" style="width: 50px; height: 50px;"><img data-bind="attr: {src: obj.avatar}"></div>
-              <span class="btn btn-file"><span class="fileupload-new">Selecionar Avatar</span><span class="fileupload-exists">Mudar</span>
-                <input type="file" name="avatar" id="avatar">
-              </span>
-              <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                <div class="row">
+                    <div class="fileupload-preview thumbnail col-md-2" style="width: 50px; height: 50px;"><img data-bind="attr: {src: obj.avatar}"></div>
+                    <div class="col-md-2">
+                        <span class="btn btn-default btn-file">
+                            <span class="fileupload-new">Selecionar Avatar</span>
+                            <span class="fileupload-exists">Mudar</span>
+                            <input type="file" name="avatar" id="avatar"></span>
+                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                    </div>
+                </div>
             </div>
             <div>
                 <hr />
-                <button type="submit" class="btn btn-primary" data-loading-text="Aguarde..." data-bind="text: !!id ? 'Atualizar' : 'Atualizar' "></button>
+                <button type="submit" class="btn btn-primary" data-loading-text="Aguarde...">{{!!id ? 'Atualizar' : 'Atualizar'}}</button>
                 <a data-bind="attr: {href: '#'+resource}" class="btn">Voltar</a>
             </div>
         </fieldset>

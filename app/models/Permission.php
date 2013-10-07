@@ -1,9 +1,10 @@
 <?php
 class Permission extends Base {
 	protected $appends = array('action_read_formatted','action_write_formatted','action_remove_formatted');
+    protected $guarded = array("id","created_at","updated_at",'action_read_formatted','action_write_formatted','action_remove_formatted');
 
     public function role() {
-        $this->belongsTo("Role");
+       return $this->belongsTo("Role");
     }
 
     public function scopeAllWithRole($query) {
@@ -12,17 +13,20 @@ class Permission extends Base {
 
     public function setActionWriteAttribute($value)
     {
-        $this->attributes["action_write"] = ($value ? 1 : 0);
+        $value = var_export($value,true);
+        $this->attributes["action_write"] = ($value == "'true'" || $value == "'1'" ? 1 : 0);
     }
 
     public function setActionReadAttribute($value)
     {
-        $this->attributes["action_read"] = ($value ? 1 : 0);
+        $value = var_export($value,true);
+        $this->attributes["action_read"] = ($value == "'true'" || $value == "'1'" ? 1 : 0);
     }
 
     public function setActionRemoveAttribute($value)
     {
-        $this->attributes["action_remove"] = ($value ? 1 : 0);
+        $value = var_export($value,true);
+        $this->attributes["action_remove"] = ($value == "'true'" || $value == "'1'" ? 1 : 0);
     }
 
     public function getActionWriteFormattedAttribute($value)

@@ -2,7 +2,7 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
     var ctor = function(obj,fields,actions,options) {
         this.obj = obj;
         this.fields = fields;
-        this.html = "<table "+(typeof options !== "undefined" && options["export_tools"] == false ? "data-tools='false'" : "")+" "+(typeof options !== "undefined" && options["click_to_show"] == false ? "data-show='false'" : "")+" style='display:none' class='table table-hover table-striped table-bordered'><thead>";
+        this.html = "<table cellpadding='0' cellspacing='0' border='0' "+(typeof options !== "undefined" && options["export_tools"] == false ? "data-tools='false'" : "")+" "+(typeof options !== "undefined" && options["click_to_show"] == false ? "data-show='false'" : "")+" style='display:none' class='table table-hover table-striped table-bordered'><thead>";
         this.custom_tfoot = (typeof options !== "undefined" && options["custom_tfoot"] != "" ? options["custom_tfoot"] : "");
         for(var k in fields) {
             this.html += "<th>"+k+"</th>";
@@ -13,8 +13,8 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
         this.html += "</thead><tbody>";
         this.generate_actions = function(id){
             return {
-                "Excluir": "<a class='btn btn-mini remove_item link_row' data-id='"+id+"'><i class='icon-trash'></i> Excluir</a>"
-            }
+                "Excluir": "<a class='btn btn-sm btn-default remove_item link_row' data-id='"+id+"'><i class='icon-trash'></i> Excluir</a>"
+            };
         };
         for(i = 0;i < obj.length;i++) {
             var item = obj[i];
@@ -23,7 +23,7 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
             for(var k in fields) {
                 field = fields[k];
                 if(field == "status") {
-                    this.html += "<td><a data-id="+item["id"]+" class='change_status btn btn-mini "+(item["status"] == "0" ? "btn-warning": "btn-success")+"'>"+(item["status"] == "0" ? "Inativo" : "Ativo")+"</a></td>";
+                    this.html += "<td><a data-id="+item["id"]+" class='change_status btn btn-sm "+(item["status"] == "0" ? "btn-warning": "btn-success")+"'>"+(item["status"] == "0" ? "Inativo" : "Ativo")+"</a></td>";
                 } else {
                     this.html += "<td>"+(item[field] ? item[field] : "")+"</td>";
                 }
@@ -42,7 +42,7 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
             for(var k in fields) {
                 var field = fields[k];
                 if(field != "status") {
-                    this.html += "<td><input type='text'></td>";
+                    this.html += "<td><input type='text' class='form-control'></td>";
                 } else {
                     this.html += "<td></td>";
                 }
@@ -51,7 +51,7 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
                 this.html += "<td></td>";
             }
             this.html += "</tr>";
-            if(this.custom_tfoot != "") {
+            if(this.custom_tfoot !== "") {
                 this.html += this.custom_tfoot+"</tfoot>";
             }
         }
@@ -59,7 +59,7 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
     };
 
     ctor.initializeTable = function(container_id,extra_options) {
-        var asInitVals = new Array();
+        var asInitVals = [];
 
         $.extend($.fn.dataTableExt.oStdClasses, {
             "sSortAsc": "header headerSortDown",
@@ -70,7 +70,7 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
         $.extend( true, $.fn.DataTable.TableTools.classes, {
             "container": "btn-group",
             "buttons": {
-                "normal": "btn",
+                "normal": "btn btn-default",
                 "disabled": "btn disabled"
             },
             "collection": {
@@ -98,11 +98,14 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
             "bSort": true,
             "bInfo": false,
             "bAutoWidth": true,
-            "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+            //"sDom": "<'row'<'col-6'f><'col-6'l>r>t<'row'<'col-6'i><'col-6'p>>",
+            //"sDom": "<'row'<'pull-right'f><'pull-left'l>r<'clearfix'>>t<'row'<'pull-left'i><'pull-right'p><'clearfix'>>",
+            //"sDom": "<'row'<'pull-right'f><'pull-left'l>r<'clearfix'>>t<'row'<'pull-left'i><'pull-right'p><'clearfix'>>",
+            //"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r><'row'<'col-md-12't>><'row'<'col-md-6'i><'col-md-6'p>>",
             "sPaginationType": "bootstrap",
             "oLanguage": {
                 "sProcessing":   "A processar...",
-                "sLengthMenu":   "Mostrar _MENU_ registros",
+                "sLengthMenu":   "_MENU_ registros",
                 "sZeroRecords":  "Não foram encontrados resultados",
                 "sInfo":         "Mostrando de _START_ até _END_ de _TOTAL_ registos",
                 "sInfoEmpty":    "Mostrando de 0 até 0 de 0 registros",
@@ -124,13 +127,16 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
         }
 
         if($("#"+container_id).find(".table").attr("data-tools") !== "false") {
-            table_options["sDom"] = "<'row-fluid'<'span4'l><'span4'T><'span4'f>r>t<'row-fluid'<'span6'i><'span6'p>>";
+            table_options["sDom"] = "<'row'<'col-xs-4'l><'col-xs-4'T><'col-xs-4'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>";
+            //table_options["sDom"] = "<'row'<'col-xs-4'f><'col-6'l>r>t<'row'<'col-6'i><'col-6'p>>";
+            //table_options["sDom"] = "<'row'<'pull-right'f><'pull-left'l>r<'clearfix'>>t<'row'<'pull-left'i><'pull-right'p><'clearfix'>>";
             table_options["oTableTools"] = {
                 "sSwfPath": "lib/tabletools/swf/copy_csv_xls_pdf.swf",
                 "aButtons": [
                     {
                         "sExtends": "print",
-                        "sButtonText": "Imprimir"
+                        "sButtonText": "Imprimir",
+                        "sInfo": "<h6>Visualização para Impressão</h6><p>Pressione ESC quando terminar.</p>"
                     },
                     {
                         "sExtends": "csv",
@@ -170,16 +176,16 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
         });
 
         if($("#"+container_id).find(".table").attr("data-show") !== "false") {
-            $("#"+container_id).find(".table tbody tr").on("click",function(){
+            $("#"+container_id).on("click",'.table tbody tr',function(){
                 window.location.href = "#"+container_id+"/edit/"+$(this).attr("data-id");
             });
         }
 
-        $("#"+container_id).find(".link_row").on("click",function(e){
+        $("#"+container_id).on("click",'.link_row',function(e){
             e.stopPropagation();
         });
 
-        $("#"+container_id).find(".change_status").on("click",function(){
+        $("#"+container_id).on("click",'.change_status',function(){
             var self = $(this);
             self.attr("disabled",true);
             $.post(container_id+"/update-status/"+self.attr("data-id"), function(r) {
@@ -213,7 +219,7 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
             return false;
         });
 
-        $("#"+container_id).find(".remove_item").on("click",function(){
+        $("#"+container_id).on("click",'.remove_item',function(){
             var self = $(this);
             self.attr("disabled",true);
             dialog.showMessage("O item será excluído. Continuar?", "Atenção!",["Ok","Cancelar"]).then(
@@ -232,6 +238,14 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
             );
             return false;
         });
+
+
+        var label = $(".dataTables_filter").find("label");
+        var input = label.find("input");
+        $(".dataTables_length").find("select").addClass("form-control").css("display","inline");
+        input.addClass("form-control").attr("placeholder","Procurar").css("float","right");
+        $(".dataTables_filter").html(input[0]);
+        //label.remove();
     }
 
     return ctor;

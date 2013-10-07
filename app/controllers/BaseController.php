@@ -3,7 +3,7 @@
 class BaseController extends Controller implements ArrayAccess {
 
     public $resource = "";
-    public $new_button_name = "";
+    public $captions = array();
     public $datatable = array("fields" => array(),"actions" => array());
 
     public function __construct() {

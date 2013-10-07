@@ -7,7 +7,7 @@ function(app,router){
         this.resource = router.activeInstruction().fragment.split("/")[0];
         this.submit = function(element) {
             var that = this;
-            if($(element).jqBootstrapValidation("hasErrors")) {
+            if(!$(element).valid()) {
                 return false;
             } else {
                 var submit = $(element).find("button[type=submit]");
@@ -34,18 +34,35 @@ function(app,router){
     Form.prototype.activate = function() {
         var that = this;
         return $.get("roles").then(function(r){
-            that.roles = r;
+            that.roles = r["data"];
             var url = !!that.id ? that.resource+"/show/"+that.id : that.resource+"/new";
             return $.get(url).then(function(u){
-                for(var i in u) {
-                    that.obj[i] = ko.observable(u[i]);
+                that.caption = u.caption;
+                for(var i in u["data"]) {
+                    that.obj[i] = ko.observable(u["data"][i]);
                 }
             });
         });
     };
 
     Form.prototype.compositionComplete = function() {
-        $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+        $('form').validate({
+            highlight: function(element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function(element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function(error, element) {
+                if(element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
     };
 
     return Form;

@@ -2,7 +2,7 @@
 
 class UserController extends RestController {
 
-    public $new_button_name = "Novo Usuário";
+    public $captions = array("new" => "Novo Usuário","update" => "Atualizar Usuário");
     public $datatable = array(
         "fields" => array('#' => 'id','Nome' => 'name','E-mail' => 'email','Nível' => 'role_name','Último Login' => 'last_login_at','Data de Criação' => 'created_at','Status' => 'status'),
         "actions" => array("Excluir")
@@ -10,7 +10,7 @@ class UserController extends RestController {
 
 	public function getIndex()
 	{
-        return Response::json(array_merge($this["datatable"],array("new_button_name" => $this["new_button_name"],"data" => User::allWithRole()->get()->toArray())));
+        return Response::json(array_merge($this["datatable"],array("caption" => $this["captions"]["new"],"data" => User::allWithRole()->get()->toArray())));
 	}
 
 	public function postCreate()

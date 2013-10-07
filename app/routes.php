@@ -18,7 +18,7 @@ Route::controller('users', 'UserController');
 Route::controller('roles', 'RoleController');
 Route::controller('permissions', 'PermissionController');
 Route::controller('account', 'AccountController');
-Route::get('/', function()
-{
+
+Route::get('/', function() {
     return View::make('template');
 });

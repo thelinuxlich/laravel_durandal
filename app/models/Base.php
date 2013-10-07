@@ -21,4 +21,14 @@ class Base extends Eloquent {
         $date = new Carbon($value);
         return $date->format("d/m/Y h:i");
     }
+
+    public function toArrayWithMutators() {
+        $array = parent::toArray();
+        foreach ($this->getMutatedAttributes() as $key) {
+            if(!array_key_exists($key, $array)) {
+                $array[$key] = $this->{$key};
+            }
+        }
+        return $array;
+    }
 }

@@ -4,7 +4,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <title>Laravel SPA</title>
+        <title>Repensadores</title>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,12 +17,13 @@
         <link rel="apple-touch-icon" href="lib/durandal/img/icon.png"/>
 
         <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
-        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-responsive.css" />
         <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" href="lib/durandal/css/durandal.css" />
         <link rel="stylesheet" href="lib/jquery-dataTables/css/datatables.css" />
+        <link rel="stylesheet" href="lib/jquery-dataTables/css/dataTables.bootstrap.css" />
         <link rel="stylesheet" href="lib/jasny-bootstrap/css/jasny-bootstrap.css" />
         <link rel="stylesheet" href="lib/tabletools/css/TableTools.css" />
+        <link rel="stylesheet" href="lib/summernote/css/summernote.css" />
         <link rel="stylesheet" href="css/main.css" />
 
         <script type="text/javascript">
@@ -41,16 +42,19 @@
             </div>
         </div>
         <script src="lib/jquery/jquery-1.10.2.min.js"></script>
-        <script src="lib/knockout/knockout-2.3.0.debug.js"></script>
-        <script src="lib/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+        <script src="lib/knockout/knockout-3.0.0rc.js"></script>
+        <script src="lib/knockout/knockout.punches.min.js"></script>
         <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-        <script src="lib/jqBootstrapValidation/jqBootstrapValidation.js"></script>
+        <script src="lib/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
         <script src="lib/jquery-dataTables/js/jquery.dataTables.min.js"></script>
+        <script src="lib/jquery-dataTables/js/dataTables.bootstrap.js"></script>
         <script src="lib/jquery-dataTables/js/paging.js"></script>
         <script src="lib/tabletools/js/TableTools.min.js"></script>
         <script src="lib/jquery-form/jquery.form.min.js"></script>
         <script src="lib/jquery_meio_mask/jquery.meio.mask.min.js"></script>
-        <script src="lib/jquery_mask_money/jquery.maskMoney.js"></script>
+        <script src="lib/jquery_hotkeys/jquery.hotkeys.js"></script>
+        <script src="lib/summernote/js/summernote.js"></script>
+        <script src="lib/jquery_validation/jquery.validate.min.js"></script>
         <script src="lib/require/require.js" data-main="js/main"></script>
     </body>
 </html>

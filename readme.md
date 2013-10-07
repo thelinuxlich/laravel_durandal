@@ -1,4 +1,4 @@
-## Laravel SPA
+## Laravel Durandal
 
 This is an example of using Laravel + Durandal for a nice SPA Application.
 

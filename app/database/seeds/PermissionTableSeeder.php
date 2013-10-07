@@ -7,7 +7,7 @@ class PermissionTableSeeder extends Seeder {
 		// Uncomment the below to wipe the table clean before populating
 		DB::table('permissions')->delete();
         $role = Role::where("name", "admin")->first()->id;
-        $resources = array('users','roles','permissions',"people","projects","objectives","themes","assets","articles");
+        $resources = array('users','roles','permissions',"people","objectives","themes","articles");
         foreach($resources as $r) {
     		$permission = array(
                 "action_read" => true,

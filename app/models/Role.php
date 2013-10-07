@@ -2,6 +2,6 @@
 class Role extends Base {
 
     public function users() {
-        $this->hasMany("User");
+        return $this->hasMany("User");
     }
 }

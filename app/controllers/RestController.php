@@ -1,7 +1,7 @@
 <?php
 class RestController extends BaseController {
     public function getIndex() {
-        return Response::json(array_merge($this["datatable"],array("new_button_name" => $this["new_button_name"],"data" => $this["resource"]::all()->toArray())));
+        return Response::json(array_merge($this["datatable"],array("caption" => $this["captions"]["new"],"data" => $this["resource"]::all()->toArray())));
     }
 
     public function postCreate() {
@@ -16,11 +16,11 @@ class RestController extends BaseController {
         foreach ($columns as $column) {
             $data[$column->getName()] = $column->getDefault();
         }
-        return Response::json($data);
+        return Response::json(array("data" => $data,"caption" => $this["captions"]["new"]));
     }
 
     public function getShow($id) {
-        return Response::json($this["resource"]::find($id));
+        return Response::json(array("data" => $this["resource"]::find($id)->toArray(),"caption" => $this["captions"]["update"]));
     }
 
     public function save($obj) {
@@ -28,6 +28,7 @@ class RestController extends BaseController {
             $obj->fill(Input::all())->save();
             return Response::json(array("status" => true,"msg" => "Registro gravado com sucesso."));
         } catch(Exception $e) {
+            Log::error($e);
             return Response::json(array("status" => false,"msg" => "Ocorreu um erro ao tentar gravar o registro."));
         }
     }

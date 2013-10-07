@@ -19,21 +19,25 @@ class AccountController extends BaseController {
     public function getSession() {
         $user = Session::get("user");
         if($user) {
-            $permissions = User::find($user["id"])->permissions();
-            $authorized = false;
-            $resource = null;
-            $action = Input::get("action");
-            foreach($permissions as $p) {
-                if($p->resource == Input::get("resource")) {
-                    $resource = $p->resource;
-                    $authorized = ($action == "index" && $p->action_read == 1) || ($action == "remove" && $p->action_remove == 1) || (in_array($action,array("new","edit")) && $p->action_write == 1);
-                    break;
+            $key = "user_permissions_id_".$user["id"]."_resource_".Input::get("resource")."_action_".Input::get("action");
+            $value = Cache::rememberForever($key,function() use($user){
+                $permissions = User::find($user["id"])->permissions();
+                $authorized = false;
+                $resource = null;
+                $action = Input::get("action");
+                foreach($permissions as $p) {
+                    if($p->resource == Input::get("resource")) {
+                        $resource = $p->resource;
+                        $authorized = ($action == "index" && $p->action_read == 1) || ($action == "remove" && $p->action_remove == 1) || (in_array($action,array("new","edit")) && $p->action_write == 1);
+                        break;
+                    }
                 }
-            }
-            if($resource == null) {
-                $authorized = true;
-            }
-            return Response::json(array("status" => true,"username" => $user["name"],"authorized" => $authorized,"permissions" => $permissions->toArray()));
+                if($resource == null) {
+                    $authorized = true;
+                }
+                return Response::json(array("status" => true,"username" => $user["name"],"authorized" => $authorized,"permissions" => $permissions->toArray()));
+            });
+            return $value;
         } else {
             return Response::json(array("status" => false));
         }

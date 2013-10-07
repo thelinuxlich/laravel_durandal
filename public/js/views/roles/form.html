@@ -1,22 +1,22 @@
 <div>
     <form novalidate data-bind="submit: submit" enctype='multipart/form-data' method="post">
         <fieldset>
-            <legend data-bind="text: !!id ? 'Atualizar Nível' : 'Novo Nível'"></legend>
-            <div class='control-group'>
-                <label class='control-label' for='name'>Nome</label>
-                <div class='controls'>
-                    <input type='text'  maxlength="255" name='name' data-bind="value: obj.name" data-validation-required-required='true' data-validation-required-message='Digite um nome.'>
+            <legend>{{caption}}</legend>
+            <div class='form-group row'>
+                <div class="col-md-3">
+                    <label class='control-label' for='name'>Nome</label>
+                    <input  class="form-control" type='text' maxlength="255" name='name' data-bind="value: obj.name" required title='Digite um nome.'>
                 </div>
             </div>
-            <div class='control-group'>
-                <label class='control-label' for='description'>Descrição</label>
-                <div class='controls'>
-                    <input type='text'  maxlength="255" name='description' data-bind="value: obj.description" data-validation-required-required='true' data-validation-required-message='Digite uma descrição.'>
+            <div class='form-group row'>
+                <div class="col-md-3">
+                    <label class='control-label' for='description'>Descrição</label>
+                    <input  class="form-control" type='text' maxlength="255" name='description' data-bind="value: obj.description" required title='Digite uma descrição.'>
                 </div>
             </div>
             <div>
                 <hr />
-                <button type="submit" class="btn btn-primary" data-loading-text="Aguarde..." data-bind="text: !!id ? 'Atualizar' : 'Gravar' "></button>
+                <button type="submit" class="btn btn-primary" data-loading-text="Aguarde...">{{!!id ? 'Atualizar' : 'Gravar'}}</button>
                 <a data-bind="attr: {href: '#'+resource}" class="btn">Voltar</a>
             </div>
         </fieldset>

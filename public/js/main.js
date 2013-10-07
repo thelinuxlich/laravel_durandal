@@ -13,8 +13,9 @@ define('knockout', [], function () { return ko; });
 
 define(['durandal/system', 'durandal/app', 'durandal/viewLocator'],
 function(system, app, viewLocator){
-    system.debug(true);
-    app.title = 'Laravel SPA';
+    ko.punches.interpolationMarkup.enable();
+    system.debug(false);
+    app.title = 'Repensadores';
     app.configurePlugins({
         router:true,
         dialog: true,
