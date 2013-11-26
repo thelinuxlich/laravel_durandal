@@ -51,7 +51,7 @@ define(['durandal/app','plugins/dialog'],function(app,dialog){
                 this.html += "<td></td>";
             }
             this.html += "</tr>";
-            if(this.custom_tfoot !== "") {
+            if(!!this.custom_tfoot) {
                 this.html += this.custom_tfoot+"</tfoot>";
             }
         }
